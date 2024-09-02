@@ -39,7 +39,7 @@ export default function App() {
     "data": '16/Setembro',
     "trabalho": false,
     "status": 'Evento',
-    "FimBimestre": false
+    "FimBimestre": true
     }
         
     ]
@@ -93,13 +93,22 @@ function Card({titulo, subtitulo, data, status, trabalho, FimBimestre}) {
             break
     }
 
+    switch (FimBimestre) {
+        case true:
+            corPrimaria= '#F2F2F2'
+            
+            break
+    
+        default:
+            break
+    }
 
 
     return(
         <div className='app-container'>
 
             {FimBimestre ? 
-            <div className="cardBranco">
+            <div className="cardBranco" style={{ backgroundColor: corPrimaria }}>
                 <div className="cardBranco-Conteudo">
                     <pre>
                         <h1>Fim do </h1>
