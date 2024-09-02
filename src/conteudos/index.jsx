@@ -4,28 +4,28 @@ import '../colors.scss';
 
 export default function App() {
     let obj = [{
-        "titulo": 'Componentes',
+    "titulo": 'Componentes',
         "subtitulo": `- Objetos e Listas de Objetos 
 - Componentes`,
-        "data": '26/Agosto',
-        "status": 'Em andamento',
-        "trabalho": true,
-        "FimBimestre": false
+    "data": '26/Agosto',
+    "status": 'Completo',
+    "trabalho": true,
+    "FimBimestre": false
     },
 
-        {"titulo": 'Renderização e Efeito',
-        "subtitulo": `- Componentes na renderização`,
-        "data": '2/Setembro',
-        "trabalho": false,
-        "status": 'Em andamento',
-        "FimBimestre": false
+    {"titulo": 'Renderização e Efeito',
+    "subtitulo": `- Componentes na renderização`,
+    "data": '2/Setembro',
+    "trabalho": false,
+    "status": 'Em andamento',
+    "FimBimestre": false
     },
 
     {"titulo": 'Consumindo APIs - Parte 1',
     "subtitulo": `- Componentes na renderização`,
     "data": '9/Setembro',
     "trabalho": false,
-    "status": 'Em andamento',
+    "status": 'Criado',
     "FimBimestre": false
     },
 
@@ -38,8 +38,9 @@ export default function App() {
     - Componentes`,
     "data": '16/Setembro',
     "trabalho": false,
-    "status": 'Em andamento',
-    "FimBimestre": false}
+    "status": 'Evento',
+    "FimBimestre": false
+    }
         
     ]
 
@@ -55,6 +56,7 @@ export default function App() {
                         data={card.data}
                         trabalho= {card.trabalho}
                         status={card.status}
+                        FimBimestre={card.FimBimestre}
                         />
                     )
                 }   
@@ -63,13 +65,51 @@ export default function App() {
 }
 
 function Card({titulo, subtitulo, data, status, trabalho, FimBimestre}) {
-    let corPrimaria = '#A3E5BA'
-    let corSegundaria = '#EFFBE2'
+    let corPrimaria = ''
+    let corSegundaria = ''
+
+    switch (status) {
+        case 'Completo':
+            corPrimaria = '#A3E5BA'
+            corSegundaria = '#EFFBE2'
+            break
+
+            case 'Em andamento':
+            corPrimaria = '#DCA3E5'
+            corSegundaria = '#EDE2FB'
+            break
+
+            case 'Criado':
+            corPrimaria = '#C3C3C3'
+            corSegundaria = '#F2F2F2'
+            break
+
+            case 'Evento':
+            corPrimaria = '#F6E448'
+            corSegundaria = '#FAF4C1'
+            break
+
+        default:
+            break
+    }
+
+
 
     return(
         <div className='app-container'>
 
-            <div className='cards'>
+            {FimBimestre ? 
+            <div className="cardBranco">
+                <div className="cardBranco-Conteudo">
+                    <pre>
+                        <h1>Fim do </h1>
+                        <h1>terceiro bimestre</h1>
+                    </pre>
+                    
+                </div>
+            </div>
+            : 
+                <div className='cards'>
                 <div className='card' style={{ backgroundColor: corSegundaria }}>
                     <div className='card-cabecalho' style={{ backgroundColor: corPrimaria }}>
                         <h2>{titulo}</h2>
@@ -82,10 +122,14 @@ function Card({titulo, subtitulo, data, status, trabalho, FimBimestre}) {
                     </div>
 
                     <p className='tag'>{data}</p>
+
                     {trabalho ? 
                     <p className='tag'>Entrega Trab.</p> : ''}
                 </div>
             </div>
+            
+            }
+            
         </div>
     )
 }

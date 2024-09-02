@@ -1,25 +1,17 @@
 .Cabecalho{
-
-display: flex;
-justify-content:left;
-flex-direction: row;
-color: #ffffff;
-
-
+    width: 100%;
+    background-color: #000;
     .itens{
         display: flex;
         color: #fff;
-        background-color: #000;
         height: 100px;
-        width: 100%;
         align-items: center;
         gap: 40px;
-
+        background-color: #000;
         img{
             height: 50px;
             width: 50px;
             margin-left: 30px;
-        
         }
 
         h1{
