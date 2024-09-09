@@ -1,55 +1,28 @@
 import Cabecalho from '../components/cabecalho';
 import './index.scss';
 import '../colors.scss';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function App() {
-    let obj = [{
-    "titulo": 'Componentes',
-        "subtitulo": `- Objetos e Listas de Objetos 
-- Componentes`,
-    "data": '26/Agosto',
-    "status": 'Completo',
-    "trabalho": true,
-    "FimBimestre": false
-    },
+    const [cards, setCards] = useState([])
 
-    {"titulo": 'Renderização e Efeito',
-    "subtitulo": `- Componentes na renderização`,
-    "data": '2/Setembro',
-    "trabalho": false,
-    "status": 'Em andamento',
-    "FimBimestre": false
-    },
-
-    {"titulo": 'Consumindo APIs - Parte 1',
-    "subtitulo": `- Componentes na renderização`,
-    "data": '9/Setembro',
-    "trabalho": false,
-    "status": 'Criado',
-    "FimBimestre": false
-    },
-
-    {"titulo": 'Consumindo APIs - Parte 1',
-    "subtitulo": `
-    - Criando um projeto React
-    - Estilização com SCSS- Navegação entre telas
-    - Variáveis de estado
-    - Renderização de lista
-    - Componentes`,
-    "data": '16/Setembro',
-    "trabalho": false,
-    "status": 'Evento',
-    "FimBimestre": true
+    async function listar() {
+        const resp = await axios.get('http://localhost:3002/cards')
+        setCards(resp.data.obj)
     }
-        
-    ]
 
+    useEffect(() =>{
+        listar()
+    }, [cards])
 
     return (
         <div className='app-container'>
             <Cabecalho />
+
+            <button id='botaoAtualizar' onClick={listar}>Atualizar</button>
                 {
-                    obj.map(card => 
+                    cards.map(card => 
                       <Card      
                         titulo={card.titulo}
                         subtitulo={card.subtitulo}
